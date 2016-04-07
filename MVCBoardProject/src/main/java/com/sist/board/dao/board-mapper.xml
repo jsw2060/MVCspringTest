@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.board.dao.board-mapper">
+	<!-- SQL문장 저장 -->
+	<!-- 
+		id : 구분 문자
+		============
+		id 		sql
+		============
+		boardAllData SEL~~
+		
+		resultType => return
+		parameterType => 매개변수
+	 -->
+	<!-- Map형식으로 저장, 리턴형은 Board 
+		resultType이 없으면, 리턴형이 없으므로, void형을 의미한다.
+	-->
+	<sql id="where-no">
+		WHERE no=#{no}
+	</sql>
+	<select id="boardAllData" resultType="Board" parameterType="java.util.Map">
+		SELECT no,subject,name,regdate,hit,num
+		FROM (SELECT no,subject,name,regdate,hit,rownum as num
+		FROM (SELECT no,subject,name,regdate,hit
+		FROM replyBoard ORDER BY no DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+		<!-- 
+			#{start} ==> map.get("start");
+			#{no} ==> board.getNo();
+			
+			데이터 들어갈때 #
+			테이블명, 컬럼명은 $
+			WHERE ${fs} LIKE '%#{ss}%'
+		 -->
+	</select>
+	<select id="boardRowCount" resultType="int">
+		SELECT COUNT(*) FROM replyBoard
+	</select>
+	
+	<!-- 내용보기 -->
+	<update id="boardHitIncrement" parameterType="int">
+		UPDATE replyBoard SET
+		hit=hit+1
+		<include refid="where-no"/>
+	</update>
+	<select id="boardContentData" resultType="Board" parameterType="int">
+		SELECT no,name,subject,content,regdate,hit
+		FROM replyBoard
+		<include refid="where-no"/>
+	</select>
+</mapper>
