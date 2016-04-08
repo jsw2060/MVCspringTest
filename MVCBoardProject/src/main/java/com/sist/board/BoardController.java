@@ -65,4 +65,36 @@ public class BoardController {
 		BoardDAO.boardInsert(vo);
 		return "index.jsp";
 	}
+	@RequestMapping("update.do")
+	public String boardUpdate(HttpServletRequest req) {
+		String no=req.getParameter("no");
+		String page=req.getParameter("page");
+		BoardVO vo = BoardDAO.boardUpdate(Integer.parseInt(no));
+		req.setAttribute("page", page);
+		req.setAttribute("vo", vo);
+		return "freeboard/update.jsp";
+	}
+	@RequestMapping("update_ok.do")
+	public String boardUpdateOk(HttpServletRequest req) throws Exception{
+		req.setCharacterEncoding("EUC-KR");
+		String no=req.getParameter("no");
+		String page=req.getParameter("page");
+		String name=req.getParameter("name");
+		String subject=req.getParameter("subject");
+		String content=req.getParameter("content");
+		String pwd=req.getParameter("pwd");
+		BoardVO vo = new BoardVO();
+		vo.setNo(Integer.parseInt(no));
+		vo.setName(name);
+		vo.setSubject(subject);
+		vo.setContent(content);
+		vo.setPwd(pwd);
+		
+		// DB¿¬µ¿
+		boolean bCheck=BoardDAO.boardUpdateOk(vo);
+		req.setAttribute("bCheck", bCheck);
+		req.setAttribute("no", no);
+		req.setAttribute("page", page);
+		return "freeboard/update_ok.jsp";
+	}
 }

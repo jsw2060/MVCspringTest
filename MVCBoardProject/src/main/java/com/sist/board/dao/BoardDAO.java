@@ -40,7 +40,7 @@ public class BoardDAO {
 	   session.update("boardHitIncrement", no);
 	   session.close();
 	   session=ssf.openSession();
-	   BoardVO vo = session.selectOne("boardContentData", no);
+	   BoardVO vo = session.selectOne("boardContentData", no);	// 제네릭이 숨겨져 있음. vo에 강제 형변환없이 들어오고 있다.
 	   session.close();
 	   return vo;
    }
@@ -48,5 +48,27 @@ public class BoardDAO {
 	   SqlSession session = ssf.openSession(true);
 	   session.insert("boardInsert", vo);
 	   session.close();
+   }
+   public static BoardVO boardUpdate(int no) {
+	   SqlSession session = ssf.openSession();
+	   BoardVO vo = session.selectOne("boardContentData", no);
+	   session.close();
+	   return vo;
+   }
+   public static boolean boardUpdateOk(BoardVO vo) {
+	   boolean bCheck=false;
+	   SqlSession session = ssf.openSession();
+	   String pwd = session.selectOne("boardGetPwd", vo.getNo());
+	   session.close();
+	   if(pwd.equals(vo.getPwd())) {
+		   bCheck=true;
+		   session=ssf.openSession(true);
+		   session.update("boardUpdate", vo);
+		   session.close();
+	   }
+	   else {
+		   bCheck=false;
+	   }
+	   return bCheck;
    }
 }

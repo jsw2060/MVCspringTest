@@ -53,4 +53,13 @@
 		VALUES((SELECT NVL(MAX(no)+1,1) FROM replyBoard),
 			#{name},#{subject},#{content},#{pwd})
 	</insert>
+	<select id="boardGetPwd" resultType="String" parameterType="int">
+		SELECT pwd FROM replyBoard
+		<include refid="where-no"/>
+	</select>
+	<update id="boardUpdate" parameterType="Board">
+		UPDATE replyBoard SET
+		name=#{name},subject=#{subject},content=#{content}
+		WHERE no=#{no}
+	</update>
 </mapper>
