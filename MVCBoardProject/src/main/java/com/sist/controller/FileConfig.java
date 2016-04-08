@@ -10,7 +10,7 @@ public class FileConfig {
 	public static List<String> getFileName(String pack) {
 		List<String> list = new ArrayList<String>();
 		try {
-			String path="C:\\springDev\\springStudy\\MVCBoardProject\\src\\main\\java\\";
+			String path="C:\\Users\\sist\\git\\SpringBoardtest\\MVCBoardProject\\src\\main\\java\\";
 			path = path+pack.replace('.', '\\');
 			File dir=new File(path);
 			File[] files=dir.listFiles();

@@ -26,12 +26,16 @@ public class DispatcherServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String cmd = request.getRequestURI();
+			System.out.println(cmd); // freeboard/list.do
 			cmd = cmd.substring(request.getContextPath().length()+1);
+			System.out.println(cmd); // list.do
 			for(String strCls:list) {
 				Class clsName = Class.forName(strCls);
 				if(clsName.isAnnotationPresent(Controller.class) == false)
 					continue;
 				Object obj = clsName.newInstance();
+				System.out.println(clsName);	// class com.sist.board.BoardController
+				System.out.println(obj);		// com.sist.board.BoardController@6c2a8ee0
 				// 클래스를 많이 쓰는 것보다 메소드를 여럿 쓰는 것이 낫기 때문에
 				Method[] methods = clsName.getDeclaredMethods();
 				for(Method m:methods) {
