@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<member>	<!-- 태그 안에 태그가 들어가면 클래스이다. 태그안에 값이 들어 있으면 변수이다. 클래스 to xml은 마샬, xml to 클래스는 언마샬 -->
+	<memberlist id="a">
+		<no>1</no>
+		<name>홍길동1</name>
+		<sex>남자</sex>
+	</memberlist>
+	<memberlist id="b">
+		<no>2</no>
+		<name>홍길동2</name>
+		<sex>남자</sex>
+	</memberlist>
+	<memberlist id="c">
+		<no>3</no>
+		<name>홍길동3</name>
+		<sex>남자</sex>
+	</memberlist>
+</member>
