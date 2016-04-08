@@ -49,4 +49,20 @@ public class BoardController {
 	public String boardInsert(HttpServletRequest req) {
 		return "freeboard/insert.jsp";
 	}
+	@RequestMapping("insert_ok.do")
+	public String boardInserOk(HttpServletRequest req) throws Exception {
+		req.setCharacterEncoding("EUC-KR");
+		String name=req.getParameter("name");
+		String subject=req.getParameter("subject");
+		String content=req.getParameter("content");
+		String pwd=req.getParameter("pwd");
+		BoardVO vo = new BoardVO();
+		vo.setName(name);
+		vo.setSubject(subject);
+		vo.setContent(content);
+		vo.setPwd(pwd);
+		// DB¿¬µ¿
+		BoardDAO.boardInsert(vo);
+		return "index.jsp";
+	}
 }

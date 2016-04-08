@@ -39,7 +39,8 @@
     <table id="table_content">
     	<tr>
     		<td align="right">
-    			<img src="freeboard/image/btn_modify.gif" border="0">
+    			<a href="update.do?no=${no }&page=${page }">
+    			<img src="freeboard/image/btn_modify.gif" border="0"></a>
     			<img src="freeboard/image/btn_delete.gif" border="0">
     			<a href="list.do?page=${page }">
     			<img src="freeboard/image/btn_list.gif" border="0"></a>

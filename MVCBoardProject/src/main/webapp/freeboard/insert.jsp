@@ -10,6 +10,7 @@
 <body>
 	<center>
 		<h3>글쓰기</h3>
+		<form method="post" action="insert_ok.do">
 		<table id="table_content">
 			<tr>
 				<td align="right" width="15%">이름</td>
@@ -20,7 +21,7 @@
 			<tr>
 				<td align="right" width="15%">제목</td>
 				<td align="left" width="85%">
-					<input type="text" name="name" size="50">
+					<input type="text" name="subject" size="50">
 				</td>
 			</tr>
 			<tr>
@@ -37,12 +38,13 @@
 			</tr>
 			<tr>
 				<td align="center" colspan="2">
-					<input type="button" value="글쓰기">
+					<input type="submit" value="글쓰기">
 					<input type="button" value="취소"
 					onclick="javascript:history.back()">
 				</td>
 			</tr>
 		</table>
+		</form>
 	</center>
 </body>
 </html>

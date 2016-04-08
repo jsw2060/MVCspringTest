@@ -44,4 +44,9 @@ public class BoardDAO {
 	   session.close();
 	   return vo;
    }
+   public static void boardInsert(BoardVO vo) {
+	   SqlSession session = ssf.openSession(true);
+	   session.insert("boardInsert", vo);
+	   session.close();
+   }
 }

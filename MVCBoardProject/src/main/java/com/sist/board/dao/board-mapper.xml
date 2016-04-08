@@ -48,4 +48,9 @@
 		FROM replyBoard
 		<include refid="where-no"/>
 	</select>
+	<insert id="boardInsert" parameterType="Board">
+		INSERT INTO replyBoard(no,name,subject,content,pwd)
+		VALUES((SELECT NVL(MAX(no)+1,1) FROM replyBoard),
+			#{name},#{subject},#{content},#{pwd})
+	</insert>
 </mapper>
